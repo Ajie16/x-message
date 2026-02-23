@@ -12,8 +12,8 @@ echo "======================================"
 echo "      请选择要启动的项目"
 echo "======================================"
 echo ""
-echo "1) X-Message 主项目 (Flask后端)"
-echo "2) OpenAgent 官网 (静态网站)"
+echo "1) X-Message 主项目 (Flask后端，端口8081)"
+echo "2) OpenAgent 官网 (静态网站，端口8082)"
 echo ""
 printf "请输入选项 (1-2，默认为1): "
 read -r choice
@@ -75,11 +75,11 @@ case $choice in
         echo ""
         
         cd openagent-website
+        PORT=8082
         
         # 查找可用的HTTP服务器
         if command -v python3 > /dev/null 2>&1; then
             echo "使用 Python HTTP 服务器..."
-            PORT=8080
             echo ""
             echo "======================================"
             echo "  服务即将启动..."
@@ -91,7 +91,6 @@ case $choice in
             
         elif command -v python > /dev/null 2>&1; then
             echo "使用 Python HTTP 服务器..."
-            PORT=8080
             echo ""
             echo "======================================"
             echo "  服务即将启动..."
@@ -106,14 +105,14 @@ case $choice in
             echo ""
             echo "======================================"
             echo "  服务即将启动..."
+            echo "  访问地址: http://localhost:$PORT"
             echo "  按 Ctrl+C 停止服务"
             echo "======================================"
             echo ""
-            npx serve . -l 8080
+            npx serve . -l $PORT
             
         elif command -v node > /dev/null 2>&1; then
             echo "使用 Node.js 启动..."
-            PORT=8080
             echo ""
             echo "======================================"
             echo "  服务即将启动..."
