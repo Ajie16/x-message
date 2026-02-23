@@ -8,7 +8,7 @@ X聚合信息是一个轻量级的个人信息展示平台，用于整合展示�
 
 - 📱 个人社交媒体信息（CSDN、微信公众号、GitHub等）
 - 📦 开源项目集合展示
-- 📰 技术咨询推送（按日期归档）
+- 📰 科技日报推送（按日期归档）
 - 💬 访客留言评论系统
 
 ## ✨ 功能特性
@@ -83,6 +83,7 @@ x-message/
 ├── config.json              # 全局配置文件
 ├── requirements.txt         # Python依赖
 ├── README.md                # 项目说明
+├── .gitignore              # Git忽略配置
 ├── static/                  # 静态资源
 │   ├── css/
 │   │   └── style.css       # 样式文件
@@ -93,7 +94,7 @@ x-message/
 │   └── index.html          # 主页面模板
 ├── content/                 # 内容文档
 │   ├── projects/           # 开源项目MD文档
-│   └── news/               # 咨询推送（按日期目录 YYYY/MM/DD/）
+│   └── news/               # 科技日报（按日期目录 YYYY/MM/DD/）
 └── data/
     └── comments.json       # 评论数据
 ```
@@ -111,7 +112,7 @@ content/projects/
 └── awesome-tool.md
 ```
 
-### 咨询推送文档
+### 科技日报文档
 
 按日期目录结构存放：
 
