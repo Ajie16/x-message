@@ -23,7 +23,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
     
-    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Critical CSS -->
+    <style>
+        :root { --primary: #165DFF; --bg-light: #F9FAFB; --text-dark: #1D2129; }
+        body { margin: 0; font-family: system-ui, sans-serif; }
+        .page-loader { position: fixed; inset: 0; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 0; background: #165DFF; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+        .hero { min-height: 100vh; padding: 120px 24px 80px; background: linear-gradient(135deg, #165DFF 0%, #0E42D2 50%, #7B61FF 100%); }
+    </style>
 </head>
 <body>
     <!-- Page Loader -->
@@ -356,6 +364,6 @@ cd project && npm install</code></pre>
         </div>
     </div>
 
-    <script src="/static/js/main.js"></script>
+    <script src="/static/js/main.js" defer></script>
 </body>
 </html>

@@ -881,11 +881,155 @@ button {
     line-height: 1.8;
 }
 
+/* ==================== Project Cards Grid ==================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.project-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-4);
+    cursor: pointer;
+    transition: var(--transition-base);
+    border: 1.5px solid transparent;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.project-card.active {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.project-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: var(--space-2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-card-desc {
+    font-size: 14px;
+    color: var(--gray-500);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--gray-400);
+}
+
+.project-card-date {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.project-card-action {
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Articles List with Accent */
+.article-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-base);
+    border-left: 3px solid transparent;
+}
+
+.article-item:hover {
+    background: var(--gray-100);
+}
+
+.article-item.active {
+    background: rgba(22,93,255,0.08);
+    border-left-color: var(--primary);
+}
+
+.article-accent {
+    width: 4px;
+    height: 100%;
+    min-height: 40px;
+    background: var(--primary);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.article-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.article-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-date {
+    font-size: 12px;
+    color: var(--gray-400);
+}
+
 /* ==================== Content Layout ==================== */
 .content-layout {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-4);
+}
+
+/* New: Full width grid layout for cards */
+.content-layout.grid-view {
+    display: block;
+}
+
+@media (min-width: 1024px) {
+    .content-layout.grid-view {
+        display: block;
+    }
 }
 
 @media (min-width: 1024px) {

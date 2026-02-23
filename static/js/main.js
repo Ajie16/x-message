@@ -418,21 +418,28 @@
             return;
         }
 
+        // Use card grid layout
         const html = state.projects.map(project => `
-            <div class="list-item ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
-                <div class="list-item-title">${project.title}</div>
-                <div class="list-item-date">${formatDate(project.date)}</div>
+            <div class="project-card ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
+                <div class="project-card-title">${project.title}</div>
+                <div class="project-card-desc">点击查看项目详情和文档</div>
+                <div class="project-card-meta">
+                    <span class="project-card-date">📅 ${formatDate(project.date)}</span>
+                    <span class="project-card-action">查看 →</span>
+                </div>
             </div>
         `).join('');
 
-        elements.projectsList.innerHTML = html;
+        elements.projectsList.innerHTML = `<div class="projects-grid">${html}</div>`;
 
-        elements.projectsList.querySelectorAll('.list-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const path = item.dataset.path;
+        elements.projectsList.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const path = card.dataset.path;
                 loadProjectContent(path);
-                elements.projectsList.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
+                elements.projectsList.querySelectorAll('.project-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                // Scroll to content
+                elements.projectContent?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     }
@@ -486,8 +493,12 @@
         const html = dates.map(date => {
             const items = state.news[date];
             const itemsHtml = items.map(item => `
-                <div class="list-item ${state.currentNews === item.path ? 'active' : ''}" data-path="${item.path}">
-                    <div class="list-item-title">${item.title}</div>
+                <div class="article-item ${state.currentNews === item.path ? 'active' : ''}" data-path="${item.path}">
+                    <div class="article-accent"></div>
+                    <div class="article-content">
+                        <div class="article-title">${item.title}</div>
+                        <div class="article-date">📅 ${formatDate(item.date || new Date().toISOString())}</div>
+                    </div>
                 </div>
             `).join('');
             
@@ -501,11 +512,11 @@
 
         elements.newsList.innerHTML = html;
 
-        elements.newsList.querySelectorAll('.list-item').forEach(item => {
+        elements.newsList.querySelectorAll('.article-item').forEach(item => {
             item.addEventListener('click', () => {
                 const path = item.dataset.path;
                 loadNewsContent(path);
-                elements.newsList.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
+                elements.newsList.querySelectorAll('.article-item').forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
             });
         });
