@@ -36,10 +36,16 @@ def load_comments():
 
 def save_comments(data):
     """保存评论数据"""
-    comments_path = config['comments']['data_file']
-    os.makedirs(os.path.dirname(comments_path), exist_ok=True)
-    with open(comments_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    try:
+        comments_path = config['comments']['data_file']
+        # 确保目录存在
+        os.makedirs(os.path.dirname(comments_path), exist_ok=True)
+        with open(comments_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(f"保存评论失败: {e}")
+        return False
 
 
 def get_md_files(directory):
@@ -268,12 +274,18 @@ def internal_error(error):
 
 # ==================== 启动 ====================
 
+def ensure_directories():
+    """确保必要的目录存在"""
+    try:
+        os.makedirs(config['content']['projects_path'], exist_ok=True)
+        os.makedirs(config['content']['news_path'], exist_ok=True)
+        os.makedirs('data', exist_ok=True)
+    except Exception as e:
+        print(f"创建目录失败: {e}")
+
+# 启动时确保目录存在
 if __name__ == '__main__':
-    # 确保必要的目录存在
-    os.makedirs(config['content']['projects_path'], exist_ok=True)
-    os.makedirs(config['content']['news_path'], exist_ok=True)
-    os.makedirs('data', exist_ok=True)
-    
+    ensure_directories()
     app.run(
         host=config['site'].get('host', '0.0.0.0'),
         port=config['site'].get('port', 8081),
