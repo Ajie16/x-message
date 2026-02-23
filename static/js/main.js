@@ -418,8 +418,11 @@
             return;
         }
 
+        // Sort projects by date (newest first)
+        const sortedProjects = [...state.projects].sort((a, b) => new Date(b.date) - new Date(a.date));
+
         // Use article-item style with left accent
-        const html = state.projects.map(project => `
+        const html = sortedProjects.map(project => `
             <div class="article-item ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
                 <div class="article-accent"></div>
                 <div class="article-content">
@@ -439,6 +442,15 @@
                 item.classList.add('active');
             });
         });
+
+        // Auto-load the latest project
+        if (sortedProjects.length > 0 && !state.currentProject) {
+            const firstItem = elements.projectsList.querySelector('.article-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+                loadProjectContent(sortedProjects[0].path);
+            }
+        }
     }
 
     async function loadProjectContent(path) {
@@ -487,7 +499,10 @@
             return;
         }
 
-        const html = dates.map(date => {
+        // Sort dates and get all items
+        const sortedDates = dates.sort().reverse();
+        
+        const html = sortedDates.map(date => {
             const items = state.news[date];
             const itemsHtml = items.map(item => `
                 <div class="article-item ${state.currentNews === item.path ? 'active' : ''}" data-path="${item.path}">
@@ -517,6 +532,15 @@
                 item.classList.add('active');
             });
         });
+
+        // Auto-load the first (latest) news
+        if (!state.currentNews && sortedDates.length > 0) {
+            const firstItem = elements.newsList.querySelector('.article-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+                loadNewsContent(firstItem.dataset.path);
+            }
+        }
     }
 
     async function loadNewsContent(path) {
