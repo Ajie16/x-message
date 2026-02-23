@@ -418,28 +418,25 @@
             return;
         }
 
-        // Use card grid layout
+        // Use article-item style with left accent
         const html = state.projects.map(project => `
-            <div class="project-card ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
-                <div class="project-card-title">${project.title}</div>
-                <div class="project-card-desc">点击查看项目详情和文档</div>
-                <div class="project-card-meta">
-                    <span class="project-card-date">📅 ${formatDate(project.date)}</span>
-                    <span class="project-card-action">查看 →</span>
+            <div class="article-item ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
+                <div class="article-accent"></div>
+                <div class="article-content">
+                    <div class="article-title">${project.title}</div>
+                    <div class="article-date">📅 ${formatDate(project.date)}</div>
                 </div>
             </div>
         `).join('');
 
-        elements.projectsList.innerHTML = `<div class="projects-grid">${html}</div>`;
+        elements.projectsList.innerHTML = html;
 
-        elements.projectsList.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const path = card.dataset.path;
+        elements.projectsList.querySelectorAll('.article-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const path = item.dataset.path;
                 loadProjectContent(path);
-                elements.projectsList.querySelectorAll('.project-card').forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                // Scroll to content
-                elements.projectContent?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                elements.projectsList.querySelectorAll('.article-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
             });
         });
     }
