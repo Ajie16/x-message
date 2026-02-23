@@ -28,3 +28,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Data (user-generated)
+data/comments.json
