@@ -3,122 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X聚合信息 - 信息聚合与开源项目展示</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <!-- 引入 Markdown 解析库 -->
+    <title>X聚合信息 · 信息聚合与开源项目展示平台</title>
+    <meta name="description" content="X聚合信息是一个信息聚合与开源项目展示平台，支持Markdown文档实时显示、评论互动、边缘设备部署与低代码构建。">
+    <meta name="keywords" content="开源项目, Markdown, 信息聚合, 技术博客, X-Message">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="X聚合信息 · 信息聚合与开源项目展示平台">
+    <meta property="og:description" content="开源项目展示、技术咨询推送、留言互动一站式平台">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- 引入代码高亮 -->
+    
+    <!-- Code Highlight -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+    
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <!-- 头部导航 -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
                 <span class="logo-icon">X</span>
                 <span class="logo-text">聚合信息</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#hero" class="nav-link active">首页</a>
+                <a href="#projects" class="nav-link">开源项目</a>
+                <a href="#news" class="nav-link">技术咨询</a>
+                <a href="#comments" class="nav-link">留言板</a>
             </div>
-            <nav class="nav">
-                <a href="#home" class="nav-link active" data-section="home">首页</a>
-                <a href="#projects" class="nav-link" data-section="projects">开源项目</a>
-                <a href="#news" class="nav-link" data-section="news">咨询推送</a>
-                <a href="#comments" class="nav-link" data-section="comments">留言</a>
-            </nav>
-            <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="菜单">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
-    </header>
-
-    <!-- 移动端菜单 -->
+    </nav>
+    
+    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" class="mobile-nav-link" data-section="home">首页</a>
-        <a href="#projects" class="mobile-nav-link" data-section="projects">开源项目</a>
-        <a href="#news" class="mobile-nav-link" data-section="news">咨询推送</a>
-        <a href="#comments" class="mobile-nav-link" data-section="comments">留言</a>
+        <a href="#hero" class="mobile-nav-link active">首页</a>
+        <a href="#projects" class="mobile-nav-link">开源项目</a>
+        <a href="#news" class="mobile-nav-link">技术咨询</a>
+        <a href="#comments" class="mobile-nav-link">留言板</a>
     </div>
 
-    <!-- 主要内容区 -->
-    <main class="main">
-        <!-- 首页/个人信息 -->
-        <section id="home" class="section active">
-            <div class="container">
-                <!-- 个人卡片 -->
-                <div class="profile-card">
-                    <div class="profile-avatar">
-                        <div class="avatar-placeholder">X</div>
-                    </div>
-                    <div class="profile-info">
-                        <h1 class="profile-name" id="authorName">加载中...</h1>
-                        <p class="profile-bio" id="authorBio">加载中...</p>
-                        
-                        <!-- 粉丝统计 -->
-                        <div class="followers-stats">
-                            <div class="stat-item">
-                                <span class="stat-value" id="csdnFollowers">-</span>
-                                <span class="stat-label">CSDN粉丝</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="wechatFollowers">-</span>
-                                <span class="stat-label">微信关注</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="githubFollowers">-</span>
-                                <span class="stat-label">GitHub</span>
-                            </div>
-                        </div>
-                        
-                        <!-- 社交链接 -->
-                        <div class="social-links" id="socialLinks">
-                            <!-- 动态生成 -->
-                        </div>
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <canvas class="hero-particles" id="heroParticles"></canvas>
+        <div class="hero-bg"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🚀</span>
+                    <span>开源项目展示首选</span>
                 </div>
-
-                <!-- 快捷入口 -->
-                <div class="quick-access">
-                    <h2 class="section-title">快速入口</h2>
-                    <div class="access-grid">
-                        <a href="#projects" class="access-card" data-section="projects">
-                            <span class="access-icon">📦</span>
-                            <span class="access-title">开源项目</span>
-                            <span class="access-desc">查看我的开源作品</span>
-                        </a>
-                        <a href="#news" class="access-card" data-section="news">
-                            <span class="access-icon">📰</span>
-                            <span class="access-title">技术咨询</span>
-                            <span class="access-desc">最新技术动态分享</span>
-                        </a>
-                        <a href="#comments" class="access-card" data-section="comments">
-                            <span class="access-icon">💬</span>
-                            <span class="access-title">留言互动</span>
-                            <span class="access-desc">欢迎交流讨论</span>
-                        </a>
+                <h1 class="hero-title">
+                    <span class="title-highlight">X聚合信息</span>
+                    <br>
+                    信息聚合与开源项目展示平台
+                </h1>
+                <p class="hero-subtitle">
+                    统一管理 <span class="highlight-text">个人信息</span>、<span class="highlight-text">开源项目</span> 和 <span class="highlight-text">技术咨询</span>
+                    <br class="hide-mobile">
+                    支持Markdown文档实时显示与互动评论
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary btn-lg ripple">
+                        <span>浏览项目</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#news" class="btn btn-secondary btn-lg">
+                        <span>技术咨询</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="0" id="projectCount">0</span>
+                        <span class="stat-label">开源项目</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="0" id="newsCount">0</span>
+                        <span class="stat-label">技术文章</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="0" id="commentCount">0</span>
+                        <span class="stat-label">互动留言</span>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <div class="hero-visual">
+                <div class="demo-window">
+                    <div class="window-header">
+                        <div class="window-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="window-title">X-Message.md</span>
+                    </div>
+                    <div class="window-body">
+                        <div class="markdown-preview">
+                            <h1>项目标题</h1>
+                            <p>这是一个 <strong>Markdown</strong> 文档预览示例...</p>
+                            <div class="code-block">
+                                <pre><code>git clone https://github.com/xxx/project.git
+cd project && npm install</code></pre>
+                            </div>
+                            <ul>
+                                <li>✓ 功能特性一</li>
+                                <li>✓ 功能特性二</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-card card-1">
+                    <span class="card-icon">📦</span>
+                    <span class="card-text">项目展示</span>
+                </div>
+                <div class="floating-card card-2">
+                    <span class="card-icon">📝</span>
+                    <span class="card-text">Markdown</span>
+                </div>
+                <div class="floating-card card-3">
+                    <span class="card-icon">💬</span>
+                    <span class="card-text">互动评论</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
+            <div class="scroll-indicator">
+                <span>向下滚动</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </div>
+    </section>
 
-        <!-- 开源项目 -->
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Projects Section -->
         <section id="projects" class="section">
-            <div class="container">
-                <h2 class="section-title">📦 开源项目</h2>
+            <div class="section-container">
+                <div class="section-header" data-animate>
+                    <span class="section-tag">📦 开源项目</span>
+                    <h2 class="section-title">探索我的开源作品</h2>
+                    <p class="section-desc">汇集各类技术项目，点击卡片查看详细文档</p>
+                </div>
+                
                 <div class="content-layout">
-                    <!-- 左侧项目列表 -->
                     <div class="sidebar">
                         <div class="list-container" id="projectsList">
                             <div class="loading">加载中...</div>
                         </div>
                     </div>
-                    <!-- 右侧内容展示 -->
                     <div class="content-area">
                         <div class="markdown-content" id="projectContent">
                             <div class="empty-state">
                                 <span class="empty-icon">👈</span>
-                                <p>请从左侧选择一个项目查看</p>
+                                <p>请从左侧选择一个项目查看详情</p>
                             </div>
                         </div>
                     </div>
@@ -126,23 +196,26 @@
             </div>
         </section>
 
-        <!-- 咨询推送 -->
-        <section id="news" class="section">
-            <div class="container">
-                <h2 class="section-title">📰 技术咨询</h2>
+        <!-- News Section -->
+        <section id="news" class="section section-alt">
+            <div class="section-container">
+                <div class="section-header" data-animate>
+                    <span class="section-tag">📰 技术咨询</span>
+                    <h2 class="section-title">技术动态与分享</h2>
+                    <p class="section-desc">按日期归档的技术文章，记录学习成长轨迹</p>
+                </div>
+                
                 <div class="content-layout">
-                    <!-- 左侧咨询列表 -->
                     <div class="sidebar">
                         <div class="list-container" id="newsList">
                             <div class="loading">加载中...</div>
                         </div>
                     </div>
-                    <!-- 右侧内容展示 -->
                     <div class="content-area">
                         <div class="markdown-content" id="newsContent">
                             <div class="empty-state">
                                 <span class="empty-icon">👈</span>
-                                <p>请从左侧选择一篇文章查看</p>
+                                <p>请从左侧选择一篇文章阅读</p>
                             </div>
                         </div>
                     </div>
@@ -150,50 +223,131 @@
             </div>
         </section>
 
-        <!-- 留言评论 -->
-        <section id="comments" class="section">
-            <div class="container">
-                <h2 class="section-title">💬 留言板</h2>
-                
-                <!-- 评论表单 -->
-                <div class="comment-form">
-                    <h3>发表评论</h3>
-                    <form id="commentForm">
-                        <div class="form-group">
-                            <label for="commentAuthor">昵称</label>
-                            <input type="text" id="commentAuthor" placeholder="请输入您的昵称" maxlength="50" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="commentContent">留言内容</label>
-                            <textarea id="commentContent" placeholder="写下您的留言..." maxlength="1000" rows="4" required></textarea>
-                            <span class="char-count"><span id="charCount">0</span>/1000</span>
-                        </div>
-                        <button type="submit" class="btn btn-primary">提交留言</button>
-                    </form>
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <div class="section-container">
+                <div class="section-header" data-animate>
+                    <span class="section-tag">👤 关于我</span>
+                    <h2 class="section-title">个人简介</h2>
                 </div>
+                
+                <div class="profile-card-large" data-animate>
+                    <div class="profile-avatar-large">
+                        <div class="avatar-placeholder-large">X</div>
+                    </div>
+                    <div class="profile-info-large">
+                        <h3 class="profile-name" id="authorName">加载中...</h3>
+                        <p class="profile-bio" id="authorBio">加载中...</p>
+                        
+                        <div class="followers-stats-large">
+                            <div class="stat-box">
+                                <span class="stat-value-large" id="csdnFollowers">-</span>
+                                <span class="stat-label-large">CSDN粉丝</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value-large" id="wechatFollowers">-</span>
+                                <span class="stat-label-large">微信关注</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value-large" id="githubFollowers">-</span>
+                                <span class="stat-label-large">GitHub</span>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links-large" id="socialLinks">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <!-- 评论列表 -->
-                <div class="comments-section">
-                    <h3>最新留言</h3>
-                    <div class="comments-list" id="commentsList">
-                        <div class="loading">加载中...</div>
+        <!-- Comments Section -->
+        <section id="comments" class="section section-alt">
+            <div class="section-container">
+                <div class="section-header" data-animate>
+                    <span class="section-tag">💬 留言板</span>
+                    <h2 class="section-title">互动交流</h2>
+                    <p class="section-desc">欢迎留下你的想法和建议</p>
+                </div>
+                
+                <div class="comments-wrapper">
+                    <!-- Comment Form -->
+                    <div class="comment-form-card" data-animate>
+                        <h3>发表评论</h3>
+                        <form id="commentForm">
+                            <div class="form-group">
+                                <label for="commentAuthor">昵称</label>
+                                <input type="text" id="commentAuthor" placeholder="请输入您的昵称" maxlength="50" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="commentContent">留言内容</label>
+                                <textarea id="commentContent" placeholder="写下您的留言..." maxlength="1000" rows="4" required></textarea>
+                                <span class="char-count"><span id="charCount">0</span>/1000</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">提交留言</button>
+                        </form>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="comments-section-card" data-animate>
+                        <h3>最新留言</h3>
+                        <div class="comments-list" id="commentsList">
+                            <div class="loading">加载中...</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 X聚合信息. Powered by Flask & Markdown.</p>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-icon">X</span>
+                        <span class="logo-text">聚合信息</span>
+                    </a>
+                    <p class="footer-desc">信息聚合与开源项目展示平台，记录技术成长轨迹。</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="#hero">首页</a></li>
+                        <li><a href="#projects">开源项目</a></li>
+                        <li><a href="#news">技术咨询</a></li>
+                        <li><a href="#comments">留言板</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>外部链接</h4>
+                    <ul>
+                        <li><a href="#" target="_blank">CSDN博客</a></li>
+                        <li><a href="#" target="_blank">GitHub</a></li>
+                        <li><a href="#" target="_blank">微信公众号</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 X聚合信息. Powered by Flask & Markdown.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- 二维码弹窗 -->
+    <!-- QR Code Modal -->
     <div class="modal" id="qrcodeModal">
+        <div class="modal-overlay"></div>
         <div class="modal-content">
-            <span class="modal-close">&times;</span>
+            <button class="modal-close" aria-label="关闭">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
             <h3 id="modalTitle">扫码关注</h3>
             <div class="qrcode-placeholder" id="qrcodeContent">
                 <div class="qrcode-box">二维码占位</div>
