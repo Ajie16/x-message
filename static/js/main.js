@@ -421,31 +421,28 @@
         // Sort projects by date (newest first)
         const sortedProjects = [...state.projects].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // Use article-item style with left accent
+        // Use improved sidebar list items
         const html = sortedProjects.map(project => `
-            <div class="article-item ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
-                <div class="article-accent"></div>
-                <div class="article-content">
-                    <div class="article-title">${project.title}</div>
-                    <div class="article-date">📅 ${formatDate(project.date)}</div>
-                </div>
+            <div class="project-card-item ${state.currentProject === project.path ? 'active' : ''}" data-path="${project.path}">
+                <div class="project-card-item-title">${project.title}</div>
+                <div class="project-card-item-meta">📅 ${formatDate(project.date)}</div>
             </div>
         `).join('');
 
         elements.projectsList.innerHTML = html;
 
-        elements.projectsList.querySelectorAll('.article-item').forEach(item => {
+        elements.projectsList.querySelectorAll('.project-card-item').forEach(item => {
             item.addEventListener('click', () => {
                 const path = item.dataset.path;
                 loadProjectContent(path);
-                elements.projectsList.querySelectorAll('.article-item').forEach(i => i.classList.remove('active'));
+                elements.projectsList.querySelectorAll('.project-card-item').forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
             });
         });
 
         // Auto-load the latest project
         if (sortedProjects.length > 0 && !state.currentProject) {
-            const firstItem = elements.projectsList.querySelector('.article-item');
+            const firstItem = elements.projectsList.querySelector('.project-card-item');
             if (firstItem) {
                 firstItem.classList.add('active');
                 loadProjectContent(sortedProjects[0].path);
