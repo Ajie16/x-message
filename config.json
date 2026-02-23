@@ -1,0 +1,64 @@
+{
+  "site": {
+    "name": "X聚合信息",
+    "description": "信息聚合与开源项目展示平台",
+    "port": 8081,
+    "host": "0.0.0.0",
+    "debug": false
+  },
+  "author": {
+    "name": "X开发者",
+    "bio": "热爱开源，专注技术分享。在这里记录我的开源项目和技术咨询。",
+    "avatar": "/static/images/avatar.png",
+    "followers": {
+      "csdn": 1250,
+      "wechat": 3680,
+      "github": 520
+    }
+  },
+  "links": {
+    "csdn": {
+      "name": "CSDN博客",
+      "url": "https://blog.csdn.net/your_username",
+      "icon": "csdn",
+      "show": true
+    },
+    "wechat": {
+      "name": "微信公众号",
+      "url": "#",
+      "qrcode": "/static/images/wechat-qr.png",
+      "icon": "wechat",
+      "show": true
+    },
+    "github": {
+      "name": "GitHub",
+      "url": "https://github.com/your_username",
+      "icon": "github",
+      "show": true
+    },
+    "email": {
+      "name": "邮箱联系",
+      "url": "mailto:your@email.com",
+      "icon": "email",
+      "show": true
+    }
+  },
+  "content": {
+    "projects_path": "content/projects",
+    "news_path": "content/news",
+    "items_per_page": 10
+  },
+  "comments": {
+    "enabled": true,
+    "require_approval": false,
+    "data_file": "data/comments.json"
+  },
+  "theme": {
+    "primary_color": "#2563eb",
+    "secondary_color": "#1e40af",
+    "background_color": "#f8fafc",
+    "card_background": "#ffffff",
+    "text_color": "#1f2937",
+    "text_secondary": "#6b7280"
+  }
+}

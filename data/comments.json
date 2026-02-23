@@ -1,0 +1,20 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "author": "访客A",
+      "content": "网站设计得很不错，期待更多内容！",
+      "date": "2026-02-22 10:30:00",
+      "approved": true,
+      "reply_to": null
+    },
+    {
+      "id": 2,
+      "author": "开发者B",
+      "content": "开源项目很有参考价值，已star关注。",
+      "date": "2026-02-23 14:20:00",
+      "approved": true,
+      "reply_to": null
+    }
+  ]
+}
